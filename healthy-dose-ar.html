@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Healthy Dose AR — Viandas saludables a tu puerta</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥗</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --white: #FAFAF8;
+    --off-white: #F2F0EC;
+    --green: #4A7C59;
+    --green-light: #7BAE8A;
+    --green-pale: #EBF2EE;
+    --black: #1A1A18;
+    --gray: #888880;
+    --gray-light: #D8D6D0;
+    --accent: #C8A96A;
+    --font-display: 'Cormorant Garamond', Georgia, serif;
+    --font-body: 'DM Sans', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--white);
+    color: var(--black);
+    overflow-x: hidden;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 20px 5%;
+    background: rgba(250,250,248,0.88);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(74,124,89,0.08);
+    transition: box-shadow .3s;
+  }
+  nav.scrolled { box-shadow: 0 4px 30px rgba(0,0,0,0.06); }
+
+  .nav-logo {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--black);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--green); }
+
+  .nav-links {
+    display: flex; gap: 36px; list-style: none;
+  }
+  .nav-links a {
+    font-size: 0.85rem; font-weight: 500; letter-spacing: 0.04em;
+    text-transform: uppercase; color: var(--gray);
+    text-decoration: none; transition: color .25s;
+  }
+  .nav-links a:hover { color: var(--green); }
+
+  .nav-cta {
+    background: var(--green); color: var(--white) !important;
+    padding: 10px 22px; border-radius: 40px;
+    font-size: 0.8rem !important; letter-spacing: 0.06em !important;
+    transition: background .25s, transform .2s !important;
+  }
+  .nav-cta:hover { background: var(--black) !important; transform: translateY(-1px); }
+
+  .nav-toggle { display: none; cursor: pointer; flex-direction: column; gap: 5px; }
+  .nav-toggle span {
+    display: block; width: 24px; height: 2px;
+    background: var(--black); border-radius: 2px; transition: .3s;
+  }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: grid; grid-template-columns: 1fr 1fr;
+    padding-top: 80px;
+    background: var(--white);
+    overflow: hidden;
+    position: relative;
+  }
+
+  .hero-left {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 80px 6% 80px 8%;
+    position: relative; z-index: 2;
+  }
+
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--green-pale); color: var(--green);
+    font-size: 0.75rem; font-weight: 500; letter-spacing: 0.08em;
+    text-transform: uppercase; padding: 8px 16px; border-radius: 40px;
+    margin-bottom: 32px; width: fit-content;
+    animation: fadeUp 0.7s ease both;
+  }
+  .hero-badge::before {
+    content: ''; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--green); flex-shrink: 0;
+  }
+
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 5vw, 5.2rem);
+    font-weight: 300; line-height: 1.08;
+    letter-spacing: -0.02em; color: var(--black);
+    margin-bottom: 24px;
+    animation: fadeUp 0.7s 0.15s ease both;
+  }
+  .hero-title em { font-style: italic; color: var(--green); }
+
+  .hero-sub {
+    font-size: 1.05rem; font-weight: 300; color: var(--gray);
+    max-width: 440px; line-height: 1.75;
+    margin-bottom: 48px;
+    animation: fadeUp 0.7s 0.3s ease both;
+  }
+
+  .hero-actions {
+    display: flex; align-items: center; gap: 20px;
+    flex-wrap: wrap;
+    animation: fadeUp 0.7s 0.45s ease both;
+  }
+
+  .btn-primary {
+    background: var(--black); color: var(--white);
+    padding: 16px 36px; border-radius: 50px;
+    font-size: 0.9rem; font-weight: 500; letter-spacing: 0.02em;
+    text-decoration: none; border: none; cursor: pointer;
+    transition: background .25s, transform .2s, box-shadow .25s;
+    display: inline-block;
+  }
+  .btn-primary:hover {
+    background: var(--green); transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(74,124,89,0.3);
+  }
+
+  .btn-ghost {
+    background: transparent; color: var(--black);
+    padding: 16px 28px; border-radius: 50px;
+    font-size: 0.9rem; font-weight: 400; letter-spacing: 0.02em;
+    text-decoration: none; border: 2px solid var(--gray-light); cursor: pointer;
+    transition: border-color .25s, color .25s, transform .2s;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-ghost:hover { border-color: var(--green); color: var(--green); transform: translateY(-2px); }
+
+  .hero-trust {
+    display: flex; align-items: center; gap: 12px;
+    margin-top: 52px;
+    animation: fadeUp 0.7s 0.6s ease both;
+  }
+  .hero-trust-avatars {
+    display: flex;
+  }
+  .hero-trust-avatars span {
+    width: 36px; height: 36px; border-radius: 50%;
+    border: 2px solid var(--white);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem; margin-left: -8px;
+  }
+  .hero-trust-avatars span:first-child { margin-left: 0; }
+  .av1 { background: #D4E8D4; }
+  .av2 { background: #F0E4CC; }
+  .av3 { background: #D4D8E8; }
+  .hero-trust-text { font-size: 0.82rem; color: var(--gray); line-height: 1.4; }
+  .hero-trust-text strong { color: var(--black); display: block; font-weight: 500; }
+
+  .hero-right {
+    position: relative; overflow: hidden;
+    animation: fadeIn 1s 0.2s ease both;
+  }
+  .hero-right::before {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(135deg, var(--green-pale) 0%, #D8ECD8 100%);
+    z-index: 0;
+  }
+  .hero-img-grid {
+    position: absolute; inset: 0; z-index: 1;
+    display: grid; grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr; gap: 4px;
+  }
+  .hero-img-cell {
+    overflow: hidden; position: relative;
+  }
+  .hero-img-cell img {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform 8s ease;
+  }
+  .hero-img-cell:hover img { transform: scale(1.04); }
+  .hero-img-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, transparent 60%, rgba(26,26,24,0.15));
+  }
+
+  .hero-float-card {
+    position: absolute; bottom: 10%; left: -28px; z-index: 10;
+    background: var(--white); border-radius: 16px;
+    padding: 16px 20px; min-width: 200px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+    display: flex; align-items: center; gap: 14px;
+    animation: floatCard 4s ease-in-out infinite;
+  }
+  .hero-float-icon {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: var(--green-pale); display: flex; align-items: center;
+    justify-content: center; font-size: 1.3rem; flex-shrink: 0;
+  }
+  .hero-float-text { font-size: 0.8rem; color: var(--gray); line-height: 1.4; }
+  .hero-float-text strong { display: block; color: var(--black); font-weight: 600; font-size: 0.9rem; }
+
+  /* ── STATS BAR ── */
+  .stats-bar {
+    background: var(--black); color: var(--white);
+    display: flex; justify-content: center; gap: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+  .stat-item {
+    display: flex; flex-direction: column; align-items: center;
+    padding: 36px 52px;
+    border-right: 1px solid rgba(255,255,255,0.1);
+    transition: background .3s;
+  }
+  .stat-item:last-child { border-right: none; }
+  .stat-item:hover { background: rgba(255,255,255,0.04); }
+  .stat-num {
+    font-family: var(--font-display); font-size: 2.8rem;
+    font-weight: 300; color: var(--white); line-height: 1;
+    margin-bottom: 4px;
+  }
+  .stat-num span { color: var(--green-light); }
+  .stat-label { font-size: 0.78rem; color: rgba(255,255,255,0.5); letter-spacing: 0.06em; text-transform: uppercase; }
+
+  /* ── SECTIONS ── */
+  section { padding: 100px 8%; }
+  .section-label {
+    font-size: 0.72rem; font-weight: 500; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--green);
+    margin-bottom: 16px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .section-label::after {
+    content: ''; flex: 1; max-width: 40px; height: 1px; background: var(--green);
+  }
+  .section-title {
+    font-family: var(--font-display); font-size: clamp(2.2rem, 4vw, 3.8rem);
+    font-weight: 300; line-height: 1.15; letter-spacing: -0.02em;
+    color: var(--black); margin-bottom: 16px;
+  }
+  .section-title em { font-style: italic; color: var(--green); }
+  .section-sub {
+    font-size: 1rem; color: var(--gray); font-weight: 300;
+    max-width: 500px; line-height: 1.8;
+  }
+
+  /* ── PACKS ── */
+  #packs { background: var(--off-white); }
+  .packs-header { max-width: 560px; margin-bottom: 60px; }
+
+  .packs-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 24px; align-items: start;
+  }
+
+  .pack-card {
+    background: var(--white); border-radius: 24px;
+    padding: 40px 36px; position: relative; overflow: hidden;
+    border: 1px solid var(--gray-light);
+    transition: transform .3s, box-shadow .3s, border-color .3s;
+  }
+  .pack-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 24px 60px rgba(0,0,0,0.08);
+    border-color: var(--green-light);
+  }
+  .pack-card.featured {
+    background: var(--black); color: var(--white);
+    border-color: var(--black);
+    transform: scale(1.03);
+  }
+  .pack-card.featured:hover {
+    transform: scale(1.03) translateY(-6px);
+    box-shadow: 0 24px 60px rgba(0,0,0,0.2);
+  }
+
+  .pack-badge {
+    display: inline-block; background: var(--green); color: var(--white);
+    font-size: 0.7rem; font-weight: 600; letter-spacing: 0.08em;
+    text-transform: uppercase; padding: 5px 14px; border-radius: 20px;
+    margin-bottom: 28px;
+  }
+  .pack-badge.hidden { opacity: 0; }
+
+  .pack-name {
+    font-family: var(--font-display); font-size: 1.8rem;
+    font-weight: 300; letter-spacing: -0.01em; margin-bottom: 6px;
+  }
+  .pack-card.featured .pack-name { color: var(--white); }
+
+  .pack-desc { font-size: 0.85rem; color: var(--gray); margin-bottom: 28px; }
+  .pack-card.featured .pack-desc { color: rgba(255,255,255,0.6); }
+
+  .pack-price {
+    display: flex; align-items: baseline; gap: 4px; margin-bottom: 32px;
+  }
+  .pack-price-curr { font-size: 1.1rem; font-weight: 300; color: var(--gray); margin-top: 6px; }
+  .pack-price-num {
+    font-family: var(--font-display); font-size: 3.6rem;
+    font-weight: 300; line-height: 1; letter-spacing: -0.03em;
+  }
+  .pack-card.featured .pack-price-num { color: var(--white); }
+  .pack-card.featured .pack-price-curr { color: rgba(255,255,255,0.5); }
+  .pack-price-period { font-size: 0.8rem; color: var(--gray); align-self: flex-end; margin-bottom: 8px; }
+  .pack-card.featured .pack-price-period { color: rgba(255,255,255,0.5); }
+
+  .pack-divider {
+    height: 1px; background: var(--gray-light); margin-bottom: 28px;
+  }
+  .pack-card.featured .pack-divider { background: rgba(255,255,255,0.12); }
+
+  .pack-features { list-style: none; margin-bottom: 36px; display: flex; flex-direction: column; gap: 12px; }
+  .pack-features li {
+    display: flex; align-items: center; gap: 12px;
+    font-size: 0.88rem; color: var(--black);
+  }
+  .pack-card.featured .pack-features li { color: rgba(255,255,255,0.85); }
+  .pack-features li::before {
+    content: '✓'; width: 20px; height: 20px; border-radius: 50%;
+    background: var(--green-pale); color: var(--green);
+    font-size: 0.7rem; font-weight: 700;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .pack-card.featured .pack-features li::before {
+    background: rgba(74,124,89,0.3); color: var(--green-light);
+  }
+
+  .pack-saving {
+    font-size: 0.75rem; text-align: center; margin-top: 12px;
+    color: var(--green); font-weight: 500;
+  }
+  .pack-card.featured .pack-saving { color: var(--green-light); }
+
+  .btn-pack {
+    width: 100%; padding: 15px;
+    border-radius: 12px; font-size: 0.88rem; font-weight: 500;
+    letter-spacing: 0.02em; text-decoration: none; text-align: center;
+    display: block; cursor: pointer; border: none;
+    transition: transform .2s, box-shadow .2s, background .25s;
+  }
+  .btn-pack-dark {
+    background: var(--black); color: var(--white);
+  }
+  .btn-pack-dark:hover { background: var(--green); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(74,124,89,0.35); }
+  .btn-pack-white {
+    background: var(--white); color: var(--black);
+  }
+  .btn-pack-white:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(255,255,255,0.2); }
+
+  /* ── HOW IT WORKS ── */
+  #como {
+    background: var(--white);
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 80px; align-items: center;
+  }
+  .steps { display: flex; flex-direction: column; gap: 0; }
+  .step {
+    display: flex; gap: 28px; padding: 32px 0;
+    border-bottom: 1px solid var(--off-white);
+    position: relative;
+    transition: padding-left .3s;
+  }
+  .step:last-child { border-bottom: none; }
+  .step:hover { padding-left: 8px; }
+  .step-num {
+    font-family: var(--font-display); font-size: 3.5rem;
+    font-weight: 300; color: var(--green-pale); line-height: 1;
+    flex-shrink: 0; width: 56px; text-align: center;
+    transition: color .3s;
+  }
+  .step:hover .step-num { color: var(--green-light); }
+  .step-content {}
+  .step-title { font-size: 1.05rem; font-weight: 500; margin-bottom: 6px; }
+  .step-desc { font-size: 0.88rem; color: var(--gray); line-height: 1.7; }
+
+  .como-visual {
+    position: relative; border-radius: 24px; overflow: hidden;
+    aspect-ratio: 4/5; background: var(--green-pale);
+  }
+  .como-visual img { width: 100%; height: 100%; object-fit: cover; }
+  .como-float {
+    position: absolute; top: 32px; right: -12px;
+    background: var(--white); border-radius: 16px;
+    padding: 16px 20px; box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+    display: flex; flex-direction: column; gap: 8px; min-width: 170px;
+  }
+  .como-float-row {
+    display: flex; align-items: center; gap: 10px; font-size: 0.8rem;
+  }
+  .como-float-dot {
+    width: 8px; height: 8px; border-radius: 50%; background: var(--green); flex-shrink: 0;
+  }
+
+  /* ── DIFERENCIAL ── */
+  #diferencial { background: var(--black); color: var(--white); }
+  .dif-header { max-width: 560px; margin-bottom: 64px; }
+  .dif-header .section-title { color: var(--white); }
+
+  .dif-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px;
+    background: rgba(255,255,255,0.05); border-radius: 20px; overflow: hidden;
+  }
+  .dif-item {
+    padding: 40px 32px; background: var(--black);
+    transition: background .3s;
+    position: relative;
+  }
+  .dif-item:hover { background: rgba(74,124,89,0.15); }
+  .dif-icon {
+    font-size: 2rem; margin-bottom: 20px; display: block;
+  }
+  .dif-title {
+    font-size: 1rem; font-weight: 500; margin-bottom: 10px;
+    color: var(--white);
+  }
+  .dif-desc { font-size: 0.84rem; color: rgba(255,255,255,0.5); line-height: 1.75; }
+
+  /* ── NUTRICIONISTA ── */
+  #nutricionista {
+    background: var(--green-pale);
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 80px; align-items: center;
+  }
+  .nutri-visual {
+    position: relative; border-radius: 24px; overflow: hidden;
+    aspect-ratio: 1; background: #C8DEC8;
+  }
+  .nutri-visual img { width: 100%; height: 100%; object-fit: cover; }
+  .nutri-badge-float {
+    position: absolute; bottom: 28px; left: 28px;
+    background: var(--green); color: var(--white);
+    border-radius: 12px; padding: 14px 20px;
+    font-size: 0.82rem; font-weight: 500; line-height: 1.5;
+  }
+  .nutri-content {}
+  .nutri-features { display: flex; flex-direction: column; gap: 18px; margin: 36px 0 44px; }
+  .nutri-feature {
+    display: flex; gap: 16px; align-items: flex-start;
+    padding: 18px; border-radius: 12px; background: rgba(255,255,255,0.5);
+    transition: background .25s;
+  }
+  .nutri-feature:hover { background: var(--white); }
+  .nutri-feat-icon {
+    width: 40px; height: 40px; border-radius: 10px;
+    background: var(--green); color: var(--white);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem; flex-shrink: 0;
+  }
+  .nutri-feat-text {}
+  .nutri-feat-title { font-size: 0.9rem; font-weight: 500; margin-bottom: 3px; }
+  .nutri-feat-desc { font-size: 0.82rem; color: var(--gray); line-height: 1.5; }
+
+  .btn-whatsapp {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: #25D366; color: var(--white);
+    padding: 16px 32px; border-radius: 50px;
+    font-size: 0.9rem; font-weight: 500;
+    text-decoration: none;
+    transition: transform .2s, box-shadow .25s, background .25s;
+  }
+  .btn-whatsapp:hover {
+    background: #1ebe5b; transform: translateY(-2px);
+    box-shadow: 0 12px 36px rgba(37,211,102,0.35);
+  }
+
+  /* ── TESTIMONIOS ── */
+  #testimonios { background: var(--white); }
+  .test-header { text-align: center; max-width: 500px; margin: 0 auto 64px; }
+  .test-header .section-label { justify-content: center; }
+  .test-header .section-label::after { display: none; }
+
+  .test-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px;
+  }
+  .test-card {
+    background: var(--off-white); border-radius: 20px; padding: 36px 32px;
+    border: 1px solid transparent;
+    transition: border-color .3s, transform .3s, box-shadow .3s;
+  }
+  .test-card:hover {
+    border-color: var(--green-light);
+    transform: translateY(-4px);
+    box-shadow: 0 16px 48px rgba(74,124,89,0.1);
+  }
+  .test-stars { color: var(--accent); font-size: 0.9rem; margin-bottom: 20px; letter-spacing: 2px; }
+  .test-quote {
+    font-family: var(--font-display); font-size: 1.15rem; font-weight: 300;
+    font-style: italic; line-height: 1.7; color: var(--black); margin-bottom: 28px;
+  }
+  .test-author { display: flex; align-items: center; gap: 12px; }
+  .test-avatar {
+    width: 44px; height: 44px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; font-size: 1.2rem;
+  }
+  .test-name { font-size: 0.88rem; font-weight: 500; margin-bottom: 2px; }
+  .test-meta { font-size: 0.78rem; color: var(--gray); }
+
+  /* ── CTA FINAL ── */
+  #cta-final {
+    background: var(--green);
+    display: flex; flex-direction: column; align-items: center;
+    text-align: center; padding: 120px 8%;
+    position: relative; overflow: hidden;
+  }
+  #cta-final::before {
+    content: '';
+    position: absolute; top: -50%; left: -20%;
+    width: 800px; height: 800px; border-radius: 50%;
+    background: rgba(255,255,255,0.04);
+    pointer-events: none;
+  }
+  #cta-final::after {
+    content: '';
+    position: absolute; bottom: -30%; right: -10%;
+    width: 600px; height: 600px; border-radius: 50%;
+    background: rgba(0,0,0,0.05);
+    pointer-events: none;
+  }
+  .cta-label {
+    font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: rgba(255,255,255,0.7); margin-bottom: 20px;
+  }
+  .cta-title {
+    font-family: var(--font-display); font-size: clamp(2.5rem, 5vw, 4.8rem);
+    font-weight: 300; color: var(--white); line-height: 1.1;
+    letter-spacing: -0.02em; margin-bottom: 20px; max-width: 700px;
+  }
+  .cta-title em { font-style: italic; }
+  .cta-sub {
+    font-size: 1rem; color: rgba(255,255,255,0.75); font-weight: 300;
+    margin-bottom: 48px; max-width: 420px; line-height: 1.7;
+  }
+  .cta-actions {
+    display: flex; gap: 16px; flex-wrap: wrap; justify-content: center;
+  }
+  .btn-cta-white {
+    background: var(--white); color: var(--green);
+    padding: 18px 42px; border-radius: 50px;
+    font-size: 0.95rem; font-weight: 600;
+    text-decoration: none; letter-spacing: 0.01em;
+    transition: transform .2s, box-shadow .25s;
+    display: inline-block;
+  }
+  .btn-cta-white:hover {
+    transform: translateY(-3px); box-shadow: 0 16px 50px rgba(0,0,0,0.2);
+  }
+  .btn-cta-outline {
+    background: transparent; color: var(--white);
+    padding: 18px 36px; border-radius: 50px;
+    font-size: 0.9rem; font-weight: 400;
+    text-decoration: none; letter-spacing: 0.01em;
+    border: 2px solid rgba(255,255,255,0.35);
+    transition: border-color .25s, transform .2s;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-cta-outline:hover { border-color: var(--white); transform: translateY(-2px); }
+
+  .cta-micro {
+    margin-top: 28px; font-size: 0.78rem;
+    color: rgba(255,255,255,0.55); display: flex; align-items: center; gap: 20px;
+    flex-wrap: wrap; justify-content: center;
+  }
+  .cta-micro span::before { content: '✓ '; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--black); color: rgba(255,255,255,0.5);
+    padding: 60px 8% 40px;
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 48px;
+  }
+  .footer-brand-name {
+    font-family: var(--font-display); font-size: 1.6rem; font-weight: 300;
+    color: var(--white); margin-bottom: 14px;
+  }
+  .footer-brand-desc { font-size: 0.84rem; line-height: 1.75; max-width: 260px; }
+  .footer-col-title {
+    font-size: 0.75rem; font-weight: 500; letter-spacing: 0.1em;
+    text-transform: uppercase; color: rgba(255,255,255,0.7); margin-bottom: 20px;
+  }
+  .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .footer-links a {
+    color: rgba(255,255,255,0.5); text-decoration: none; font-size: 0.84rem;
+    transition: color .2s;
+  }
+  .footer-links a:hover { color: var(--white); }
+  .footer-bottom {
+    grid-column: 1/-1; padding-top: 32px; border-top: 1px solid rgba(255,255,255,0.08);
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 0.78rem;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; } to { opacity: 1; }
+  }
+  @keyframes floatCard {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  .reveal {
+    opacity: 0; transform: translateY(32px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 1024px) {
+    #hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-right { height: 50vw; min-height: 300px; }
+    .hero-float-card { left: 20px; }
+    #como, #nutricionista { grid-template-columns: 1fr; }
+    .como-visual, .nutri-visual { aspect-ratio: 16/9; }
+    .dif-grid { grid-template-columns: repeat(2, 1fr); }
+    .packs-grid { grid-template-columns: 1fr; max-width: 480px; }
+    .pack-card.featured { transform: none; }
+    footer { grid-template-columns: 1fr 1fr; }
+    .footer-brand { grid-column: 1/-1; }
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 16px 5%; }
+    .nav-links { display: none; }
+    .nav-toggle { display: flex; }
+    section { padding: 72px 6%; }
+    .stats-bar { flex-wrap: wrap; }
+    .stat-item { padding: 24px 32px; flex: 1 1 50%; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .test-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
+    .dif-grid { grid-template-columns: 1fr; }
+    footer { grid-template-columns: 1fr; gap: 32px; }
+    .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+    .cta-actions { flex-direction: column; align-items: center; }
+    .hero-actions { flex-direction: column; align-items: flex-start; }
+    .nav-links.open {
+      display: flex; flex-direction: column;
+      position: fixed; top: 61px; left: 0; right: 0;
+      background: var(--white); padding: 24px 6%;
+      border-bottom: 1px solid var(--off-white);
+      gap: 20px; z-index: 99;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">Healthy<span>Dose</span> AR</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#packs">Packs</a></li>
+    <li><a href="#como">Cómo funciona</a></li>
+    <li><a href="#nutricionista">Nutricionistas</a></li>
+    <li><a href="#testimonios">Testimonios</a></li>
+    <li><a href="#packs" class="nav-cta">Elegir mi plan</a></li>
+  </ul>
+  <div class="nav-toggle" id="navToggle">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-left">
+    <div class="hero-badge">🌿 Ahora con envío a todo CABA y GBA</div>
+    <h1 class="hero-title">Comer sano<br><em>nunca fue</em><br>tan fácil.</h1>
+    <p class="hero-sub">Recibí viandas saludables listas para consumir, diseñadas por nutricionistas certificados. Sin excusas, sin perder tiempo.</p>
+    <div class="hero-actions">
+      <a href="#packs" class="btn-primary">Elegir mi pack →</a>
+      <a href="#como" class="btn-ghost">
+        <span>▶</span> Cómo funciona
+      </a>
+    </div>
+    <div class="hero-trust">
+      <div class="hero-trust-avatars">
+        <span class="av1">🙋</span>
+        <span class="av2">🙋</span>
+        <span class="av3">🙋</span>
+      </div>
+      <div class="hero-trust-text">
+        <strong>+1.200 clientes activos</strong>
+        comiendo sano cada semana
+      </div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-img-grid">
+      <div class="hero-img-cell">
+        <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=600&q=80" alt="Ensalada saludable">
+        <div class="hero-img-overlay"></div>
+      </div>
+      <div class="hero-img-cell">
+        <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&q=80" alt="Bowl nutritivo">
+        <div class="hero-img-overlay"></div>
+      </div>
+      <div class="hero-img-cell">
+        <img src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=600&q=80" alt="Comida preparada">
+        <div class="hero-img-overlay"></div>
+      </div>
+      <div class="hero-img-cell">
+        <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=600&q=80" alt="Meal prep">
+        <div class="hero-img-overlay"></div>
+      </div>
+    </div>
+    <div class="hero-float-card">
+      <div class="hero-float-icon">🥗</div>
+      <div class="hero-float-text">
+        <strong>Listas en 3 min</strong>
+        Abrís, calentás, comés
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar reveal">
+  <div class="stat-item">
+    <div class="stat-num">1.2<span>K+</span></div>
+    <div class="stat-label">Clientes activos</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">98<span>%</span></div>
+    <div class="stat-label">Satisfacción</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">8<span>+</span></div>
+    <div class="stat-label">Nutricionistas</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">5<span>★</span></div>
+    <div class="stat-label">Calificación promedio</div>
+  </div>
+</div>
+
+<!-- PACKS -->
+<section id="packs">
+  <div class="packs-header reveal">
+    <div class="section-label">Nuestros packs</div>
+    <h2 class="section-title">Elegí el plan<br>que <em>se adapta</em> a vos</h2>
+    <p class="section-sub">Sin contratos, sin complicaciones. Elegís, recibís, disfrutás.</p>
+  </div>
+  <div class="packs-grid reveal">
+
+    <!-- Pack 10 -->
+    <div class="pack-card">
+      <div class="pack-badge hidden">Inicio</div>
+      <div class="pack-name">Pack Inicio</div>
+      <div class="pack-desc">10 viandas · Ideal para probar</div>
+      <div class="pack-price">
+        <div class="pack-price-curr">$</div>
+        <div class="pack-price-num">38.900</div>
+      </div>
+      <div class="pack-divider"></div>
+      <ul class="pack-features">
+        <li>10 viandas balanceadas</li>
+        <li>Menú variado semanal</li>
+        <li>Entrega en 24–48hs</li>
+        <li>Sin conservantes</li>
+        <li>Opción sin TACC disponible</li>
+      </ul>
+      <a href="https://wa.me/5491100000000?text=Quiero%20el%20Pack%20Inicio!" class="btn-pack btn-pack-dark" target="_blank">Comprar ahora</a>
+    </div>
+
+    <!-- Pack 20 (featured) -->
+    <div class="pack-card featured">
+      <div class="pack-badge">🔥 Más elegido</div>
+      <div class="pack-name">Pack Balance</div>
+      <div class="pack-desc">20 viandas · El más popular</div>
+      <div class="pack-price">
+        <div class="pack-price-curr">$</div>
+        <div class="pack-price-num">69.900</div>
+      </div>
+      <div class="pack-divider"></div>
+      <ul class="pack-features">
+        <li>20 viandas balanceadas</li>
+        <li>Menú rotativo quincenal</li>
+        <li>Entregas 2x semana</li>
+        <li>Asesoramiento nutricional</li>
+        <li>Opciones veganas/vegetarianas</li>
+        <li>Ahorro de 10% vs pack inicio</li>
+      </ul>
+      <a href="https://wa.me/5491100000000?text=Quiero%20el%20Pack%20Balance!" class="btn-pack btn-pack-white" target="_blank">Comprar ahora</a>
+      <div class="pack-saving">✓ Ahorrás $7.900 respecto al pack básico</div>
+    </div>
+
+    <!-- Pack Mensual -->
+    <div class="pack-card">
+      <div class="pack-badge" style="background:var(--accent)">Premium</div>
+      <div class="pack-name">Pack Mensual</div>
+      <div class="pack-desc">40 viandas · Máximo ahorro</div>
+      <div class="pack-price">
+        <div class="pack-price-curr">$</div>
+        <div class="pack-price-num">124.900</div>
+      </div>
+      <div class="pack-divider"></div>
+      <ul class="pack-features">
+        <li>40 viandas premium</li>
+        <li>Menú 100% personalizado</li>
+        <li>Entregas programadas</li>
+        <li>1 consulta con nutricionista</li>
+        <li>Seguimiento mensual</li>
+        <li>Ahorro del 20%</li>
+      </ul>
+      <a href="https://wa.me/5491100000000?text=Quiero%20el%20Pack%20Mensual!" class="btn-pack btn-pack-dark" target="_blank">Comprar ahora</a>
+      <div class="pack-saving">✓ Incluye consulta con nutricionista gratis</div>
+    </div>
+  </div>
+</section>
+
+<!-- CÓMO FUNCIONA -->
+<section id="como">
+  <div>
+    <div class="section-label reveal">El proceso</div>
+    <h2 class="section-title reveal">Así de <em>simple</em><br>es empezar</h2>
+    <p class="section-sub reveal" style="margin-bottom:48px">Tres pasos y listo. Sin vueltas, sin complicaciones, sin excusas.</p>
+    <div class="steps">
+      <div class="step reveal">
+        <div class="step-num">01</div>
+        <div class="step-content">
+          <div class="step-title">Elegís tu pack</div>
+          <div class="step-desc">Seleccionás el plan que mejor se adapta a tus objetivos y restricciones alimentarias. Si tenés dudas, te asesoramos gratis.</div>
+        </div>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">02</div>
+        <div class="step-content">
+          <div class="step-title">Recibís tus viandas</div>
+          <div class="step-desc">Entregamos en CABA y GBA en packaging refrigerado, listas para guardar en la heladera. Frescas, selladas y etiquetadas.</div>
+        </div>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">03</div>
+        <div class="step-content">
+          <div class="step-title">Comés sano sin esfuerzo</div>
+          <div class="step-desc">Abrís, calentás 3 minutos y disfrutás. Cada vianda tiene su info nutricional. Tan fácil como pedir delivery, pero mucho más sano.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="como-visual reveal">
+    <img src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=800&q=80" alt="Meal prep organizado">
+    <div class="como-float">
+      <div class="como-float-row"><div class="como-float-dot"></div> Fresco hoy</div>
+      <div class="como-float-row"><div class="como-float-dot" style="background:var(--accent)"></div> Sin conservantes</div>
+      <div class="como-float-row"><div class="como-float-dot"></div> Listo en 3 min</div>
+    </div>
+  </div>
+</section>
+
+<!-- DIFERENCIAL -->
+<section id="diferencial">
+  <div class="dif-header reveal">
+    <div class="section-label" style="color:var(--green-light)">Por qué elegirnos</div>
+    <h2 class="section-title" style="color:var(--white)">Pensado para<br><em>tu bienestar</em> real</h2>
+  </div>
+  <div class="dif-grid reveal">
+    <div class="dif-item">
+      <span class="dif-icon">🧬</span>
+      <div class="dif-title">Diseñado por nutricionistas</div>
+      <div class="dif-desc">Cada menú es creado y supervisado por licenciados en nutrición. Nada improvisado.</div>
+    </div>
+    <div class="dif-item">
+      <span class="dif-icon">🌱</span>
+      <div class="dif-title">Ingredientes de calidad</div>
+      <div class="dif-desc">Seleccionamos proveedores con estándares altos. Sin aditivos artificiales, sin conservantes.</div>
+    </div>
+    <div class="dif-item">
+      <span class="dif-icon">⚖️</span>
+      <div class="dif-title">Siempre balanceadas</div>
+      <div class="dif-desc">Macros calculados. Proteínas, carbohidratos y grasas en el punto justo para tu objetivo.</div>
+    </div>
+    <div class="dif-item">
+      <span class="dif-icon">⏱️</span>
+      <div class="dif-title">Ahorro de tiempo real</div>
+      <div class="dif-desc">Sin ir al súper, sin lavar, sin cortar, sin cocinar. Recuperás horas por semana.</div>
+    </div>
+  </div>
+</section>
+
+<!-- NUTRICIONISTA -->
+<section id="nutricionista">
+  <div class="nutri-visual reveal">
+    <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=700&q=80" alt="Consulta con nutricionista">
+    <div class="nutri-badge-float">
+      🎓 Licenciados en Nutrición<br>Matrícula habilitada
+    </div>
+  </div>
+  <div class="nutri-content">
+    <div class="section-label reveal">Consulta profesional</div>
+    <h2 class="section-title reveal">Alcanzá tus <em>objetivos</em><br>con un plan a tu medida</h2>
+    <p class="section-sub reveal" style="margin-bottom:0">Una consulta con nuestros nutricionistas puede cambiar tu relación con la comida para siempre.</p>
+    <div class="nutri-features reveal">
+      <div class="nutri-feature">
+        <div class="nutri-feat-icon">🎯</div>
+        <div class="nutri-feat-text">
+          <div class="nutri-feat-title">Plan 100% personalizado</div>
+          <div class="nutri-feat-desc">Adaptado a tu peso, objetivos, restricciones y estilo de vida.</div>
+        </div>
+      </div>
+      <div class="nutri-feature">
+        <div class="nutri-feat-icon">📊</div>
+        <div class="nutri-feat-text">
+          <div class="nutri-feat-title">Seguimiento continuo</div>
+          <div class="nutri-feat-desc">Te acompañamos en el proceso con ajustes mensuales según tu progreso.</div>
+        </div>
+      </div>
+      <div class="nutri-feature">
+        <div class="nutri-feat-icon">💬</div>
+        <div class="nutri-feat-text">
+          <div class="nutri-feat-title">Consultas online o presencial</div>
+          <div class="nutri-feat-desc">Coordinás fácilmente por WhatsApp. Cómodo, rápido y sin traslados.</div>
+        </div>
+      </div>
+    </div>
+    <a href="https://wa.me/5491100000000?text=Quiero%20agendar%20una%20consulta%20con%20un%20nutricionista" class="btn-whatsapp reveal" target="_blank">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.49"/></svg>
+      Agendar consulta gratis
+    </a>
+  </div>
+</section>
+
+<!-- TESTIMONIOS -->
+<section id="testimonios">
+  <div class="test-header reveal">
+    <div class="section-label">Lo que dicen</div>
+    <h2 class="section-title">Resultados <em>reales</em>,<br>clientes felices</h2>
+  </div>
+  <div class="test-grid reveal">
+    <div class="test-card">
+      <div class="test-stars">★★★★★</div>
+      <div class="test-quote">"Nunca pensé que iba a comer tan rico y tan sano al mismo tiempo. Me cambió la rutina completamente. Ya voy por mi tercer mes."</div>
+      <div class="test-author">
+        <div class="test-avatar" style="background:#D4E8D4">🙋‍♀️</div>
+        <div>
+          <div class="test-name">Valentina R.</div>
+          <div class="test-meta">Pack Mensual · Palermo, CABA</div>
+        </div>
+      </div>
+    </div>
+    <div class="test-card">
+      <div class="test-stars">★★★★★</div>
+      <div class="test-quote">"Trabajo 10 horas por día y no tenía tiempo para cocinar sano. Healthy Dose me salvó la vida. Bajé 6 kilos en dos meses sin pasar hambre."</div>
+      <div class="test-author">
+        <div class="test-avatar" style="background:#F0E4CC">🙋‍♂️</div>
+        <div>
+          <div class="test-name">Matías G.</div>
+          <div class="test-meta">Pack Balance · Belgrano, CABA</div>
+        </div>
+      </div>
+    </div>
+    <div class="test-card">
+      <div class="test-stars">★★★★★</div>
+      <div class="test-quote">"La consulta con la nutricionista fue increíble. Armaron mi plan según mi celiaquía y las viandas son deliciosas. Lo recomiendo a todos."</div>
+      <div class="test-author">
+        <div class="test-avatar" style="background:#E4D4E8">🙋‍♀️</div>
+        <div>
+          <div class="test-name">Florencia M.</div>
+          <div class="test-meta">Pack Inicio + Consulta · San Isidro, GBA</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section id="cta-final">
+  <div class="cta-label">¿Listo para empezar?</div>
+  <h2 class="cta-title">Empezá hoy con<br><em>Healthy Dose AR</em></h2>
+  <p class="cta-sub">Tu versión más sana empieza con una sola decisión. Sin complicaciones, sin excusas.</p>
+  <div class="cta-actions">
+    <a href="#packs" class="btn-cta-white">Ver todos los packs →</a>
+    <a href="https://wa.me/5491100000000?text=Hola!%20Quiero%20info%20sobre%20Healthy%20Dose" class="btn-cta-outline" target="_blank">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.49"/></svg>
+      Consultar por WhatsApp
+    </a>
+  </div>
+  <div class="cta-micro">
+    <span>Envío a CABA y GBA</span>
+    <span>Sin contratos</span>
+    <span>Pago en cuotas</span>
+    <span>Cancelá cuando quieras</span>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">
+    <div class="footer-brand-name">HealthyDose AR</div>
+    <div class="footer-brand-desc">Viandas saludables diseñadas por nutricionistas, listas para que comas bien sin perder tiempo.</div>
+  </div>
+  <div>
+    <div class="footer-col-title">Packs</div>
+    <ul class="footer-links">
+      <li><a href="#packs">Pack Inicio</a></li>
+      <li><a href="#packs">Pack Balance</a></li>
+      <li><a href="#packs">Pack Mensual</a></li>
+    </ul>
+  </div>
+  <div>
+    <div class="footer-col-title">Empresa</div>
+    <ul class="footer-links">
+      <li><a href="#">Nosotros</a></li>
+      <li><a href="#nutricionista">Nutricionistas</a></li>
+      <li><a href="#">Blog</a></li>
+      <li><a href="#">Trabaja con nosotros</a></li>
+    </ul>
+  </div>
+  <div>
+    <div class="footer-col-title">Contacto</div>
+    <ul class="footer-links">
+      <li><a href="https://wa.me/5491100000000" target="_blank">WhatsApp</a></li>
+      <li><a href="mailto:hola@healthydosear.com">hola@healthydosear.com</a></li>
+      <li><a href="#">Instagram</a></li>
+    </ul>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Healthy Dose AR. Todos los derechos reservados.</span>
+    <span>Hecho con 🌿 en Buenos Aires, Argentina</span>
+  </div>
+</footer>
+
+<script>
+  // Nav scroll
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 30);
+  });
+
+  // Mobile nav
+  const toggle = document.getElementById('navToggle');
+  const links = document.getElementById('navLinks');
+  toggle.addEventListener('click', () => {
+    links.classList.toggle('open');
+  });
+  links.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => links.classList.remove('open'));
+  });
+
+  // Reveal on scroll
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 60);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
