@@ -1,0 +1,223 @@
+# 🥗 Healthy Dose AR — Landing Page
+
+Landing page estática para **Healthy Dose AR**, servicio de viandas saludables con entrega en CABA y GBA. Incluye sección de menú interactivo con carrito y pedidos por WhatsApp.
+
+---
+
+## 📁 Estructura del proyecto
+
+```
+healthydose/
+├── index.html        ← Todo el sitio (HTML + CSS + JS en un solo archivo)
+└── README.md
+```
+
+El proyecto es un único archivo HTML autocontenido. No requiere Node.js, npm, ni ningún build step.
+
+---
+
+## ✏️ Cómo personalizar
+
+### 1. Número de WhatsApp
+
+Buscá esta línea en el `<script>` y reemplazá con tu número real (formato internacional, sin `+`):
+
+```js
+const WA_NUMBER = '5491100000000'; // 👉 Reemplazá con tu número real
+```
+
+Ejemplo: para `+54 9 11 1234-5678` → `'5491112345678'`
+
+---
+
+### 2. Agregar o editar viandas del menú
+
+En el `<script>`, encontrás el array `MENU_ITEMS`. Cada objeto es una vianda:
+
+```js
+{
+  id: 10,                          // Número único (no repetir)
+  name: 'Mi Nueva Vianda',         // Nombre
+  desc: 'Descripción breve.',      // Descripción corta
+  tag: 'proteico',                 // Categoría (ver abajo)
+  tagLabel: 'Proteico',            // Etiqueta que se muestra
+  kcal: 400,                       // Calorías
+  prot: 35,                        // Proteínas (g)
+  carbs: 30,                       // Carbohidratos (g)
+  grasas: 10,                      // Grasas (g)
+  emoji: '🥩',                     // Emoji (se muestra si no hay imagen)
+  img: 'https://...'               // URL de foto (o null para usar emoji)
+},
+```
+
+**Categorías disponibles** para `tag`:
+
+| Valor          | Etiqueta visible |
+|----------------|-----------------|
+| `proteico`     | Proteico        |
+| `vegano`       | Vegano          |
+| `vegetariano`  | Vegetariano     |
+| `sin-tacc`     | Sin TACC        |
+| `light`        | Light           |
+
+Para agregar una nueva categoría, agregá el valor al array de filtros en el HTML y el color en el CSS (clase `.tag-NOMBRE`).
+
+---
+
+### 3. Precios de los packs
+
+Los precios están directamente en el HTML. Buscá la sección `#packs` y modificá:
+
+```html
+<div class="pack-price-num">38.900</div>
+```
+
+---
+
+### 4. Imágenes del menú
+
+Podés usar:
+- **URL de Unsplash** (como ahora): gratis, pero dependés de su CDN
+- **Imagen propia**: subila a tu servidor o a Cloudinary y usá la URL directa
+- **Sin imagen**: poné `img: null` y se mostrará el emoji
+
+Para imágenes propias, recomendamos tamaño mínimo **600×400px** y formato WebP o JPEG.
+
+---
+
+### 5. Textos y contenido
+
+Todo el contenido está en el HTML. Buscá directamente con Ctrl+F el texto que querés cambiar.
+
+---
+
+## 🚀 Deploy — Opciones recomendadas
+
+Estás en Vercel, que es una excelente opción. Acá un resumen de las mejores alternativas para este tipo de sitio estático:
+
+### ✅ Vercel (lo que ya usás) — RECOMENDADO
+
+**Por qué:** Deploy automático al hacer push a GitHub, CDN global, HTTPS gratis, dominio personalizado, muy rápido.
+
+```bash
+# Si tenés el CLI de Vercel instalado:
+vercel --prod
+
+# O simplemente hacé push a tu repo de GitHub
+# y Vercel lo detecta y deploya solo
+```
+
+**Cómo conectar dominio propio:**
+1. Vercel Dashboard → tu proyecto → Settings → Domains
+2. Agregá `healthydosear.com` (o el que tengas)
+3. Seguí las instrucciones DNS (generalmente un CNAME o A record)
+
+---
+
+### 🆓 Alternativas gratuitas
+
+#### Netlify
+Muy similar a Vercel. Drag & drop del archivo `index.html` en [app.netlify.com](https://app.netlify.com) y listo. También tiene deploy automático desde GitHub.
+
+```bash
+# Con CLI:
+netlify deploy --prod --dir .
+```
+
+#### GitHub Pages
+Gratis, si el repo es público (o con GitHub Pro para privados).
+
+1. Subí `index.html` a un repo de GitHub
+2. Settings → Pages → Source: rama `main`, carpeta `/`
+3. URL: `tuusuario.github.io/tu-repo`
+
+**Limitación:** No tiene edge CDN tan potente como Vercel/Netlify.
+
+#### Cloudflare Pages
+La mejor opción si ya usás Cloudflare para el dominio. CDN extremadamente rápido, gratis ilimitado.
+
+---
+
+### 💰 Si el sitio crece — opciones de pago
+
+| Opción | Cuándo usarla |
+|--------|--------------|
+| **Vercel Pro** (~$20/mes) | Si necesitás analytics, más builds, o password protection |
+| **VPS (DigitalOcean, Linode)** | Si agregás backend (base de datos, pedidos reales, etc.) |
+| **AWS S3 + CloudFront** | Si necesitás escala enterprise o ya usás AWS |
+
+---
+
+### 📋 Checklist antes de publicar
+
+- [ ] Reemplazá `WA_NUMBER` con tu número real
+- [ ] Actualizá todos los links `wa.me/5491100000000` en el HTML
+- [ ] Reemplazá el email `hola@healthydosear.com` por el tuyo
+- [ ] Revisá los precios de los packs
+- [ ] Verificá que las imágenes de Unsplash cargan (pueden requerir conexión)
+- [ ] Probá en mobile (Chrome DevTools → modo responsive)
+- [ ] Configurá tu dominio en Vercel
+
+---
+
+## 🛒 Cómo funciona el carrito de menú
+
+1. El usuario clickea **"+ Agregar"** en las viandas que le interesan
+2. Las cards seleccionadas se marcan en verde
+3. Aparece una **barra flotante** en la parte inferior con el contador
+4. Al clickear **"Pedir por WhatsApp"**, se abre WA con un mensaje pre-armado que lista todas las viandas elegidas
+5. El usuario puede limpiar la selección con el botón ✕
+
+El mensaje que se envía tiene este formato:
+```
+Hola! Quiero pedir las siguientes viandas:
+
+• Bowl de Pollo y Quinoa
+• Salmón con Vegetales
+• Tazón Light de Atún
+
+¿Me podés dar info sobre disponibilidad y precios?
+```
+
+---
+
+## 🎨 Paleta de colores
+
+| Variable | Valor | Uso |
+|----------|-------|-----|
+| `--green` | `#4A7C59` | Color principal, botones, acentos |
+| `--green-light` | `#7BAE8A` | Hover states, highlights |
+| `--green-pale` | `#EBF2EE` | Fondos suaves, badges |
+| `--black` | `#1A1A18` | Textos principales, fondos oscuros |
+| `--white` | `#FAFAF8` | Fondo general |
+| `--off-white` | `#F2F0EC` | Secciones alternadas |
+| `--accent` | `#C8A96A` | Dorado, badge Premium |
+| `--gray` | `#888880` | Textos secundarios |
+
+---
+
+## 📱 Responsive
+
+El sitio está optimizado para:
+- **Desktop:** 1280px+
+- **Tablet:** 768px–1024px (grilla de 2 columnas)
+- **Mobile:** hasta 768px (1 columna, nav colapsable)
+
+---
+
+## 🔧 Tecnologías usadas
+
+- HTML5 semántico
+- CSS3 con custom properties (variables)
+- Vanilla JavaScript (sin frameworks)
+- Google Fonts: Cormorant Garamond + DM Sans
+- Imágenes: Unsplash (CDN externo)
+- Íconos: SVG inline (WhatsApp)
+
+No requiere npm, webpack, ni ningún build step. Es un archivo HTML puro.
+
+---
+
+## 📞 Soporte
+
+¿Dudas? Escribinos a `hola@healthydosear.com`
