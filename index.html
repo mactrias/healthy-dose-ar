@@ -424,23 +424,7 @@
   }
   .btn-whatsapp:hover { background: #1ebe5b; transform: translateY(-2px); box-shadow: 0 12px 36px rgba(37,211,102,0.35); }
 
-  /* TESTIMONIOS */
-  #testimonios { background: var(--white); }
-  .test-header { text-align: center; max-width: 500px; margin: 0 auto 64px; }
-  .test-header .section-label { justify-content: center; }
-  .test-header .section-label::after { display: none; }
-  .test-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
-  .test-card {
-    background: var(--off-white); border-radius: 20px; padding: 36px 32px;
-    border: 1px solid transparent; transition: border-color .3s, transform .3s, box-shadow .3s;
-  }
-  .test-card:hover { border-color: var(--green-light); transform: translateY(-4px); box-shadow: 0 16px 48px rgba(74,124,89,0.1); }
-  .test-stars { color: var(--accent); font-size: 0.9rem; margin-bottom: 20px; letter-spacing: 2px; }
-  .test-quote { font-family: var(--font-display); font-size: 1.15rem; font-weight: 300; font-style: italic; line-height: 1.7; color: var(--black); margin-bottom: 28px; }
-  .test-author { display: flex; align-items: center; gap: 12px; }
-  .test-avatar { width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
-  .test-name { font-size: 0.88rem; font-weight: 500; margin-bottom: 2px; }
-  .test-meta { font-size: 0.78rem; color: var(--gray); }
+ 
 
   /* CTA FINAL */
   #cta-final {
@@ -599,48 +583,45 @@
     <div class="pack-card">
       <div class="pack-badge hidden">Inicio</div>
       <div class="pack-name">Pack Inicio</div>
-      <div class="pack-desc">10 viandas · Ideal para probar</div>
-      <div class="pack-price"><div class="pack-price-curr">$</div><div class="pack-price-num">38.900</div></div>
+      <div class="pack-desc">5 viandas · Ideal para probar</div>
+      <div class="pack-price"><div class="pack-price-curr">$</div><div class="pack-price-num">62.500</div></div>
       <div class="pack-divider"></div>
       <ul class="pack-features">
-        <li>10 viandas balanceadas</li>
+        <li>5 viandas balanceadas</li>
         <li>Menú variado semanal</li>
-        <li>Entrega en 24–48hs</li>
+        <li>Alto en preoteina y fibra</li>
         <li>Sin conservantes</li>
-        <li>Opción sin TACC disponible</li>
       </ul>
       <a href="https://wa.me/5491132984799?text=Quiero%20el%20Pack%20Inicio!" class="btn-pack btn-pack-dark" target="_blank">Comprar ahora</a>
     </div>
     <div class="pack-card featured">
-      <div class="pack-badge">🔥 Más elegido</div>
+      <div class="pack-badge">🔥🔥</div>
       <div class="pack-name">Pack Balance</div>
-      <div class="pack-desc">20 viandas · El más popular</div>
-      <div class="pack-price"><div class="pack-price-curr">$</div><div class="pack-price-num">69.900</div></div>
+      <div class="pack-desc">15 viandas · El más popular</div>
+      <div class="pack-price"><div class="pack-price-curr">$</div><div class="pack-price-num">159.000</div></div>
       <div class="pack-divider"></div>
       <ul class="pack-features">
-        <li>20 viandas balanceadas</li>
-        <li>Menú rotativo quincenal</li>
-        <li>Entregas 2x semana</li>
-        <li>Asesoramiento nutricional</li>
-        <li>Opciones veganas/vegetarianas</li>
-        <li>Ahorro de 10% vs pack inicio</li>
+        <li>15 viandas balanceadas</li>
+        <li>Menú variado</li>
+        <li>Asesoramiento nutricional incluido</li>
+        <li>Envios gratis CABA</li>
+        <li>Ahorro de 15% vs pack inicio</li>
       </ul>
       <a href="https://wa.me/5491132984799?text=Quiero%20el%20Pack%20Balance!" class="btn-pack btn-pack-white" target="_blank">Comprar ahora</a>
-      <div class="pack-saving">✓ Ahorrás $7.900 respecto al pack básico</div>
+      <div class="pack-saving">✓ Ahorrás $28.500 respecto al pack inicio</div>
     </div>
     <div class="pack-card">
       <div class="pack-badge" style="background:var(--accent)">Premium</div>
       <div class="pack-name">Pack Mensual</div>
-      <div class="pack-desc">40 viandas · Máximo ahorro</div>
-      <div class="pack-price"><div class="pack-price-curr">$</div><div class="pack-price-num">124.900</div></div>
+      <div class="pack-desc">20 viandas</div>
+      <div class="pack-price"><div class="pack-price-curr">$</div><div class="pack-price-num">212.500</div></div>
       <div class="pack-divider"></div>
       <ul class="pack-features">
-        <li>40 viandas premium</li>
-        <li>Menú 100% personalizado</li>
-        <li>Entregas programadas</li>
-        <li>1 consulta con nutricionista</li>
-        <li>Seguimiento mensual</li>
-        <li>Ahorro del 20%</li>
+        <li>20 viandas para cubrir tu mes</li>
+        <li>Entrega semanal</li>
+        <li>Plan personalizado</li>
+        <li>Consulta con nutricionista gratuita</li>
+        <li>Envio gratis CABA</li>
       </ul>
       <a href="https://wa.me/5491132984799?text=Quiero%20el%20Pack%20Mensual!" class="btn-pack btn-pack-dark" target="_blank">Comprar ahora</a>
       <div class="pack-saving">✓ Incluye consulta con nutricionista gratis</div>
@@ -754,7 +735,7 @@
   <div class="nutri-content">
     <div class="section-label reveal">Consulta profesional</div>
     <h2 class="section-title reveal">Alcanzá tus <em>objetivos</em><br>con un plan a tu medida</h2>
-    <p class="section-sub reveal" style="margin-bottom:0">Una consulta con nuestros nutricionistas puede cambiar tu relación con la comida para siempre.</p>
+    <p class="section-sub reveal" style="margin-bottom:0">Te acompañamos en el proceso para que logres construir hábitos y alcanzar tus objetivos.</p>
     <div class="nutri-features reveal">
       <div class="nutri-feature">
         <div class="nutri-feat-icon">🎯</div>
@@ -777,35 +758,13 @@
 </section>
 
 <!-- TESTIMONIOS -->
-<section id="testimonios">
-  <div class="test-header reveal">
-    <div class="section-label">Lo que dicen</div>
-    <h2 class="section-title">Resultados <em>reales</em>,<br>clientes felices</h2>
-  </div>
-  <div class="test-grid reveal">
-    <div class="test-card">
-      <div class="test-stars">★★★★★</div>
-      <div class="test-quote">"Nunca pensé que iba a comer tan rico y tan sano al mismo tiempo. Me cambió la rutina completamente. Ya voy por mi tercer mes."</div>
-      <div class="test-author"><div class="test-avatar" style="background:#D4E8D4">🙋‍♀️</div><div><div class="test-name">Valentina R.</div><div class="test-meta">Pack Mensual · Palermo, CABA</div></div></div>
-    </div>
-    <div class="test-card">
-      <div class="test-stars">★★★★★</div>
-      <div class="test-quote">"Trabajo 10 horas por día y no tenía tiempo para cocinar sano. dosis helathy me salvó la vida. Bajé 6 kilos en dos meses sin pasar hambre."</div>
-      <div class="test-author"><div class="test-avatar" style="background:#F0E4CC">🙋‍♂️</div><div><div class="test-name">Matías G.</div><div class="test-meta">Pack Balance · Belgrano, CABA</div></div></div>
-    </div>
-    <div class="test-card">
-      <div class="test-stars">★★★★★</div>
-      <div class="test-quote">"La consulta con la nutricionista fue increíble. Armaron mi plan según mi celiaquía y las viandas son deliciosas. Lo recomiendo a todos."</div>
-      <div class="test-author"><div class="test-avatar" style="background:#E4D4E8">🙋‍♀️</div><div><div class="test-name">Florencia M.</div><div class="test-meta">Pack Inicio + Consulta · San Isidro, GBA</div></div></div>
-    </div>
-  </div>
-</section>
+
 
 <!-- CTA FINAL -->
 <section id="cta-final">
   <div class="cta-label">¿Listo para empezar?</div>
   <h2 class="cta-title">Empezá hoy con<br><em>Dosis Healthy</em></h2>
-  <p class="cta-sub">Tu versión más sana empieza con una sola decisión. Sin complicaciones, sin excusas.</p>
+  <p class="cta-sub">Tu mejor versión empieza con la decisión de cuidarte. Te ayudamos a hacerlo, sin complicaciones y sin excusas.</p>
   <div class="cta-actions">
     <a href="#packs" class="btn-cta-white">Ver todos los packs →</a>
     <a href="https://wa.me/5491132984799?text=Hola!%20Quiero%20info%20sobre%20dosis%20healthy" class="btn-cta-outline" target="_blank">
@@ -816,8 +775,6 @@
   <div class="cta-micro">
     <span>Envío a CABA y GBA</span>
     <span>Sin contratos</span>
-    <span>Pago en cuotas</span>
-    <span>Cancelá cuando quieras</span>
   </div>
 </section>
 
@@ -848,8 +805,6 @@
     <div class="footer-col-title">Contacto</div>
     <ul class="footer-links">
       <li><a href="https://wa.me/5491132984799" target="_blank">WhatsApp</a></li>
-      <li><a href="mailto:hola@healthydosear.com">hola@healthydosear.com</a></li>
-      <li><a href="#">Instagram</a></li>
     </ul>
   </div>
   <div class="footer-bottom">
