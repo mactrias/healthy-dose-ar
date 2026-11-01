@@ -733,6 +733,11 @@
         background: #d5f5e3;
         color: #1a7a4a;
       }
+      .tag-altoenfibra {
+        background: #d5f5e3;
+        color: #696610;
+      }
+
       .tag-liviano {
         background: #44f08f;
         color: #0fa95c;
@@ -1927,6 +1932,9 @@
         <button class="filter-btn active" data-filter="all">Todos</button>
         <button class="filter-btn" data-filter="proteico">Proteico</button>
         <button class="filter-btn" data-filter="vegano">Vegano</button>
+        <button class="filter-btn" data-filter="altoenfibra">
+          Alto en Fibra
+        </button>
         <button class="filter-btn" data-filter="liviano">Liviano</button>
         <button class="filter-btn" data-filter="vegetariano">
           Vegetariano
@@ -2456,87 +2464,52 @@
         },
         {
           id: 3,
-          name: "Salmón con Vegetales",
-          desc: "Filete de salmón al horno, zucchini grillado, zanahoria y puré de coliflor.",
-          tag: "proteico",
-          tagLabel: "Proteico",
-          prot: 40,
-          carbs: 18,
-          fibra: 22,
-          emoji: "🐟",
-          img: "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=600&q=80",
+          name: "Tarta Capresse",
+          desc: "Combinacion de tomate queso portsalud light y rucula fresca",
+          tag: "vegetariano",
+          tagLabel: "Vegetariano",
+          prot: 32,
+          carbs: 30,
+          fibra: 100,
+          precio: 12000,
+          emoji: "🍅",
+          img: "https://6ae7699c9d12361351a49550.imgix.net/sandbox/WhatsApp%20Image%202026-11-01%20at%201.13.28%20PM%20(1).jpeg",
         },
         {
           id: 4,
-          name: "Pasta de Lentejas Rojas",
-          desc: "Pasta sin TACC con salsa de lentejas rojas, tomate cherry y albahaca fresca.",
-          tag: "sin-tacc",
-          tagLabel: "Sin TACC",
-          prot: 22,
-          carbs: 55,
-          fibra: 7,
-          emoji: "🍝",
-          img: "https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=600&q=80",
+          name: "Croquetas de Garbanzos y espinaca",
+          desc: "Elaboradas a base de garbanzos y espinaca, con salsa cremosa de bechamel y choclo.",
+          tag: "proteico",
+          tagLabel: "Proteico",
+          prot: 50,
+          carbs: 75,
+          fibra: 14,
+          emoji: "🌽",
+          img: "https://6ae7699c9d12361351a49550.imgix.net/sandbox/WhatsApp%20Image%202026-11-01%20at%201.13.29%20PM%20(2).jpeg",
         },
         {
           id: 5,
-          name: "Wrap Vegetariano",
-          desc: "Tortilla integral con huevo, queso port salut, tomate, palta y hojas verdes.",
-          tag: "vegetariano",
-          tagLabel: "Vegetariano",
-          prot: 20,
-          carbs: 30,
-          fibra: 14,
+          name: "Wraps de Pollo & Vegetales Grillados",
+          desc: "Tortillas suaves, rellenas de pollo combinadas con vegetales grillados.",
+          tag: "altoenfibra",
+          tagLabel: "Alto en Fibra",
+          prot: 18,
+          carbs: 20,
+          fibra: 8,
           emoji: "🌯",
-          img: "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=600&q=80",
+          img: "https://6ae7699c9d12361351a49550.imgix.net/sandbox/WhatsApp%20Image%202026-11-01%20at%201.13.29%20PM%20(3).jpeg",
         },
         {
           id: 6,
-          name: "Tazón Light de Atún",
-          desc: "Atún al natural, pepino, tomate, cebolla morada, limón y aceite de oliva.",
-          tag: "light",
-          tagLabel: "Light",
-          prot: 28,
-          carbs: 12,
-          fibra: 8,
-          emoji: "🥗",
-          img: "https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=600&q=80",
-        },
-        {
-          id: 7,
-          name: "Milanesa de Soja al Horno",
-          desc: "Milanesa de soja crocante al horno con puré de batata y ensalada de rúcula.",
-          tag: "vegano",
-          tagLabel: "Vegano",
-          prot: 24,
-          carbs: 44,
-          fibra: 12,
-          emoji: "🌿",
-          img: null,
-        },
-        {
-          id: 8,
-          name: "Pollo Tandoori con Arroz",
-          desc: "Muslos de pollo marinados en especias tandoori, arroz basmati y yogur natural.",
+          name: "Tarta de Pollo & Vegetales",
+          desc: "Pollo desmenuzado convinado con vegetales en una masa integral casera dorada y crocante.",
           tag: "proteico",
           tagLabel: "Proteico",
-          prot: 42,
-          carbs: 40,
-          fibra: 14,
-          emoji: "🫕",
-          img: null,
-        },
-        {
-          id: 9,
-          name: "Ensalada Niçoise Light",
-          desc: "Huevo duro, judías verdes, tomate, aceituna y atún. Aderezo de mostaza Dijon.",
-          tag: "light",
-          tagLabel: "Light",
-          prot: 24,
-          carbs: 16,
-          fibra: 12,
-          emoji: "🥚",
-          img: null,
+          prot: 37,
+          carbs: 35,
+          fibra: 8,
+          emoji: "🍗",
+          img: "https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=600&q=80",
         },
       ];
 
@@ -2547,6 +2520,7 @@
       const tagClasses = {
         proteico: "tag-proteico",
         vegano: "tag-vegano",
+        altoenfibra: "altoenfibra",
         liviano: "tag-liviano",
         vegetariano: "tag-vegetariano",
         "sin-tacc": "tag-sin-tacc",
