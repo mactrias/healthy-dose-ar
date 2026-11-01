@@ -793,10 +793,7 @@
         align-items: center;
         justify-content: space-between;
       }
-      .menu-card-kcal {
-        font-size: 0.78rem;
-        color: var(--gray);
-      }
+
       .btn-add-menu {
         display: flex;
         align-items: center;
@@ -2429,7 +2426,7 @@
       // ── MENÚ DATA ──
       // 👉 PENDIENTE: reemplazar estos platos de ejemplo por el menú real.
       //    Para agregar una vianda: copiá un objeto del array y modificalo.
-      //    Campos: id, name, desc, tag, tagLabel, kcal, prot, carbs, fibra, emoji, img (opcional: URL de imagen)
+      //    Campos: id, name, desc, tag, tagLabel,  prot, carbs, fibra, emoji, img (opcional: URL de imagen)
       const MENU_ITEMS = [
         {
           id: 1,
@@ -2450,7 +2447,6 @@
           desc: "Garbanzos especiados, arroz integral, espinaca salteada y tahini.",
           tag: "vegano",
           tagLabel: "Vegano",
-          kcal: 380,
           prot: 18,
           carbs: 48,
           fibra: 11,
@@ -2463,7 +2459,6 @@
           desc: "Filete de salmón al horno, zucchini grillado, zanahoria y puré de coliflor.",
           tag: "proteico",
           tagLabel: "Proteico",
-          kcal: 460,
           prot: 40,
           carbs: 18,
           fibra: 22,
@@ -2476,7 +2471,6 @@
           desc: "Pasta sin TACC con salsa de lentejas rojas, tomate cherry y albahaca fresca.",
           tag: "sin-tacc",
           tagLabel: "Sin TACC",
-          kcal: 395,
           prot: 22,
           carbs: 55,
           fibra: 7,
@@ -2489,7 +2483,6 @@
           desc: "Tortilla integral con huevo, queso port salut, tomate, palta y hojas verdes.",
           tag: "vegetariano",
           tagLabel: "Vegetariano",
-          kcal: 350,
           prot: 20,
           carbs: 30,
           fibra: 14,
@@ -2502,7 +2495,6 @@
           desc: "Atún al natural, pepino, tomate, cebolla morada, limón y aceite de oliva.",
           tag: "light",
           tagLabel: "Light",
-          kcal: 240,
           prot: 28,
           carbs: 12,
           fibra: 8,
@@ -2515,7 +2507,6 @@
           desc: "Milanesa de soja crocante al horno con puré de batata y ensalada de rúcula.",
           tag: "vegano",
           tagLabel: "Vegano",
-          kcal: 410,
           prot: 24,
           carbs: 44,
           fibra: 12,
@@ -2528,7 +2519,6 @@
           desc: "Muslos de pollo marinados en especias tandoori, arroz basmati y yogur natural.",
           tag: "proteico",
           tagLabel: "Proteico",
-          kcal: 490,
           prot: 42,
           carbs: 40,
           fibra: 14,
@@ -2541,7 +2531,6 @@
           desc: "Huevo duro, judías verdes, tomate, aceituna y atún. Aderezo de mostaza Dijon.",
           tag: "light",
           tagLabel: "Light",
-          kcal: 290,
           prot: 24,
           carbs: 16,
           fibra: 12,
@@ -2588,7 +2577,7 @@
             <div class="macro"><div class="macro-val">${item.fibra}g</div><div class="macro-key">Fibras</div></div>
           </div>
           <div class="menu-card-footer">
-            <div class="menu-card-kcal">🔥 ${item.kcal} kcal</div>
+            
             <button class="btn-add-menu ${selected.has(item.id) ? "added" : ""}"
               onclick="toggleItem(${item.id})"
               aria-label="${selected.has(item.id) ? "Quitar" : "Agregar"} ${item.name}">
