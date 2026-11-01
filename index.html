@@ -2392,234 +2392,234 @@
     </footer>
 
     <script>
-      // ══════════════════════════════════════════
-      // 👉 NÚMERO DE WHATSAPP: cambialo SOLO acá y se actualiza en toda la web
-      //    Formato: 549 + código de área sin 0 + número sin 15 (ej: 5491155555555)
-      // ══════════════════════════════════════════
-      const WA_NUMBER = "5491132984799";
+        // ══════════════════════════════════════════
+        // 👉 NÚMERO DE WHATSAPP: cambialo SOLO acá y se actualiza en toda la web
+        //    Formato: 549 + código de área sin 0 + número sin 15 (ej: 5491155555555)
+        // ══════════════════════════════════════════
+        const WA_NUMBER = "5491132984799";
 
-      document.querySelectorAll("[data-wa]").forEach((a) => {
-        a.href = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(a.dataset.wa)}`;
-      });
+        document.querySelectorAll("[data-wa]").forEach((a) => {
+          a.href = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(a.dataset.wa)}`;
+        });
 
-      // ── NAV ──
-      const navbar = document.getElementById("navbar");
-      window.addEventListener("scroll", () =>
-        navbar.classList.toggle("scrolled", window.scrollY > 30),
-      );
-      const toggle = document.getElementById("navToggle");
-      const links = document.getElementById("navLinks");
-      toggle.addEventListener("click", () => links.classList.toggle("open"));
-      links
-        .querySelectorAll("a")
-        .forEach((a) =>
-          a.addEventListener("click", () => links.classList.remove("open")),
+        // ── NAV ──
+        const navbar = document.getElementById("navbar");
+        window.addEventListener("scroll", () =>
+          navbar.classList.toggle("scrolled", window.scrollY > 30),
         );
+        const toggle = document.getElementById("navToggle");
+        const links = document.getElementById("navLinks");
+        toggle.addEventListener("click", () => links.classList.toggle("open"));
+        links
+          .querySelectorAll("a")
+          .forEach((a) =>
+            a.addEventListener("click", () => links.classList.remove("open")),
+          );
 
-      // ── REVEAL ──
-      const reveals = document.querySelectorAll(".reveal");
-      const observer = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry, i) => {
-            if (entry.isIntersecting) {
-              setTimeout(() => entry.target.classList.add("visible"), i * 60);
-              observer.unobserve(entry.target);
-            }
-          });
-        },
-        { threshold: 0.1, rootMargin: "0px 0px -40px 0px" },
-      );
-      reveals.forEach((el) => observer.observe(el));
+        // ── REVEAL ──
+        const reveals = document.querySelectorAll(".reveal");
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry, i) => {
+              if (entry.isIntersecting) {
+                setTimeout(() => entry.target.classList.add("visible"), i * 60);
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.1, rootMargin: "0px 0px -40px 0px" },
+        );
+        reveals.forEach((el) => observer.observe(el));
 
-      // ── MENÚ DATA ──
-      // 👉 PENDIENTE: reemplazar estos platos de ejemplo por el menú real.
-      //    Para agregar una vianda: copiá un objeto del array y modificalo.
-      //    Campos: id, name, desc, tag, tagLabel,  prot, carbs, fibra, emoji, img (opcional: URL de imagen)
-      const MENU_ITEMS = [
-        {
-          id: 1,
-          name: "Tarta de Zapallito",
-          desc: "Tarta en masa integral casera, con zapallitos salteados, cebolla, y queso portsalud.",
-          tag: "liviano",
-          tagLabel: "Liviano",
-          prot: 25,
-          carbs: 35,
-          fibra: 8,
-          precio: 12000,
-          emoji: "🥘",
-          img: "https://6ae7699c9d12361351a49550.imgix.net/sandbox/WhatsApp%20Image%202026-11-01%20at%201.13.28%20PM.jpeg",
-        },
-        {
-          id: 2,
-          name: "Tarta de Brocoli y Queso",
-          desc: "Brocoli y cebolla salteados convinados con un relleno cremoso sobre una masa integral casera",
-          tag: "proteico",
-          tagLabel: "Proteico",
-          prot: 29,
-          carbs: 32,
-          fibra: 9,
-          precio: 12000,
-          emoji: "🥦",
-          img: "https://6ae7699c9d12361351a49550.imgix.net/sandbox/WhatsApp%20Image%202026-11-01%20at%201.13.29%20PM%20(1).jpeg",
-        },
-        {
-          id: 3,
-          name: "Tarta Capresse",
-          desc: "Combinacion de tomate queso portsalud light y rucula fresca",
-          tag: "vegetariano",
-          tagLabel: "Vegetariano",
-          prot: 32,
-          carbs: 30,
-          fibra: 100,
-          precio: 12000,
-          emoji: "🍅",
-          img: "https://6ae7699c9d12361351a49550.imgix.net/sandbox/WhatsApp%20Image%202026-11-01%20at%201.13.28%20PM%20(1).jpeg",
-        },
-        {
-          id: 4,
-          name: "Croquetas de Garbanzos y espinaca",
-          desc: "Elaboradas a base de garbanzos y espinaca, con salsa cremosa de bechamel y choclo.",
-          tag: "proteico",
-          tagLabel: "Proteico",
-          prot: 50,
-          carbs: 75,
-          fibra: 14,
-          emoji: "🌽",
-          img: "https://6ae7699c9d12361351a49550.imgix.net/sandbox/WhatsApp%20Image%202026-11-01%20at%201.13.29%20PM%20(2).jpeg",
-        },
-        {
-          id: 5,
-          name: "Wraps de Pollo & Vegetales Grillados",
-          desc: "Tortillas suaves, rellenas de pollo combinadas con vegetales grillados.",
-          tag: "altoenfibra",
-          tagLabel: "Alto en Fibra",
-          prot: 18,
-          carbs: 20,
-          fibra: 8,
-          emoji: "🌯",
-          img: "https://6ae7699c9d12361351a49550.imgix.net/sandbox/WhatsApp%20Image%202026-11-01%20at%201.13.29%20PM%20(3).jpeg",
-        },
-        {
-          id: 6,
-          name: "Tarta de Pollo & Vegetales",
-          desc: "Pollo desmenuzado convinado con vegetales en una masa integral casera dorada y crocante.",
-          tag: "proteico",
-          tagLabel: "Proteico",
-          prot: 37,
-          carbs: 35,
-          fibra: 8,
-          emoji: "🍗",
-          img: "https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=600&q=80",
-        },
-      ];
+        // ── MENÚ DATA ──
+        // 👉 PENDIENTE: reemplazar estos platos de ejemplo por el menú real.
+        //    Para agregar una vianda: copiá un objeto del array y modificalo.
+        //    Campos: id, name, desc, tag, tagLabel,  prot, carbs, fibra, emoji, img (opcional: URL de imagen)
+        const MENU_ITEMS = [
+          {
+            id: 1,
+            name: "Tarta de Zapallito",
+            desc: "Tarta en masa integral casera, con zapallitos salteados, cebolla, y queso portsalud.",
+            tag: "liviano",
+            tagLabel: "Liviano",
+            prot: 25,
+            carbs: 35,
+            fibra: 8,
+            precio: 12000,
+            emoji: "🥘",
+            img: "https://6ae7699c9d12361351a49550.imgix.net/sandbox/WhatsApp%20Image%202026-11-01%20at%201.13.28%20PM.jpeg",
+          },
+          {
+            id: 2,
+            name: "Tarta de Brocoli y Queso",
+            desc: "Brocoli y cebolla salteados convinados con un relleno cremoso sobre una masa integral casera",
+            tag: "proteico",
+            tagLabel: "Proteico",
+            prot: 29,
+            carbs: 32,
+            fibra: 9,
+            precio: 12000,
+            emoji: "🥦",
+            img: "https://6ae7699c9d12361351a49550.imgix.net/sandbox/WhatsApp%20Image%202026-11-01%20at%201.13.29%20PM%20(1).jpeg",
+          },
+          {
+            id: 3,
+            name: "Tarta Capresse",
+            desc: "Combinacion de tomate queso portsalud light y rucula fresca",
+            tag: "vegetariano",
+            tagLabel: "Vegetariano",
+            prot: 32,
+            carbs: 30,
+            fibra: 100,
+            precio: 12000,
+            emoji: "🍅",
+            img: "https://6ae7699c9d12361351a49550.imgix.net/sandbox/WhatsApp%20Image%202026-11-01%20at%201.13.28%20PM%20(1).jpeg",
+          },
+          {
+            id: 4,
+            name: "Croquetas de Garbanzos y espinaca",
+            desc: "Elaboradas a base de garbanzos y espinaca, con salsa cremosa de bechamel y choclo.",
+            tag: "proteico",
+            tagLabel: "Proteico",
+            prot: 50,
+            carbs: 75,
+            fibra: 14,
+            emoji: "🌽",
+            img: "https://6ae7699c9d12361351a49550.imgix.net/sandbox/WhatsApp%20Image%202026-11-01%20at%201.13.29%20PM%20(2).jpeg",
+          },
+          {
+            id: 5,
+            name: "Wraps de Pollo & Vegetales Grillados",
+            desc: "Tortillas suaves, rellenas de pollo combinadas con vegetales grillados.",
+            tag: "altoenfibra",
+            tagLabel: "Alto en Fibra",
+            prot: 18,
+            carbs: 20,
+            fibra: 8,
+            emoji: "🌯",
+            img: "https://6ae7699c9d12361351a49550.imgix.net/sandbox/WhatsApp%20Image%202026-11-01%20at%201.13.29%20PM%20(3).jpeg",
+          },
+          {
+            id: 6,
+            name: "Tarta de Pollo & Vegetales",
+            desc: "Pollo desmenuzado convinado con vegetales en una masa integral casera dorada y crocante.",
+            tag: "proteico",
+            tagLabel: "Proteico",
+            prot: 37,
+            carbs: 35,
+            fibra: 8,
+            emoji: "🍗",
+            img: "https://6ae7699c9d12361351a49550.imgix.net/sandbox/WhatsApp%20Image%202026-11-01%20at%202.12.34%20PM.jpeg,
+          },
+        ];
 
-      // ── MENÚ LOGIC ──
-      let selected = new Set();
-      let activeFilter = "all";
+        // ── MENÚ LOGIC ──
+        let selected = new Set();
+        let activeFilter = "all";
 
-      const tagClasses = {
-        proteico: "tag-proteico",
-        vegano: "tag-vegano",
-        altoenfibra: "altoenfibra",
-        liviano: "tag-liviano",
-        vegetariano: "tag-vegetariano",
-        "sin-tacc": "tag-sin-tacc",
-        light: "tag-light",
-      };
+        const tagClasses = {
+          proteico: "tag-proteico",
+          vegano: "tag-vegano",
+          altoenfibra: "altoenfibra",
+          liviano: "tag-liviano",
+          vegetariano: "tag-vegetariano",
+          "sin-tacc": "tag-sin-tacc",
+          light: "tag-light",
+        };
 
-      function renderMenu() {
-        const grid = document.getElementById("menuGrid");
-        const items =
-          activeFilter === "all"
-            ? MENU_ITEMS
-            : MENU_ITEMS.filter((i) => i.tag === activeFilter);
+        function renderMenu() {
+          const grid = document.getElementById("menuGrid");
+          const items =
+            activeFilter === "all"
+              ? MENU_ITEMS
+              : MENU_ITEMS.filter((i) => i.tag === activeFilter);
 
-        grid.innerHTML = items
-          .map(
-            (item) => `
-      <div class="menu-card ${selected.has(item.id) ? "selected" : ""}" id="card-${item.id}">
-        ${
-          item.img
-            ? `<img class="menu-card-img" src="${item.img}" alt="${item.name}" loading="lazy">`
-            : `<div class="menu-card-img-placeholder">${item.emoji}</div>`
-        }
-        <div class="menu-card-body">
-          <span class="menu-tag ${tagClasses[item.tag]}">${item.tagLabel}</span>
-          <div class="menu-card-name">${item.name}</div>
-          <div class="menu-card-desc">${item.desc}</div>
-          <div class="menu-card-macros">
-            <div class="macro"><div class="macro-val">${item.prot}g</div><div class="macro-key">Prot.</div></div>
-            <div class="macro"><div class="macro-val">${item.carbs}g</div><div class="macro-key">Carbs</div></div>
-            <div class="macro"><div class="macro-val">${item.fibra}g</div><div class="macro-key">Fibras</div></div>
-            <div class="macro"><div class="macro-val">${item.precio}$</div><div class="macro-key">precios</div></div>
-          </div>
-          <div class="menu-card-footer">
-            
-            <button class="btn-add-menu ${selected.has(item.id) ? "added" : ""}"
-              onclick="toggleItem(${item.id})"
-              aria-label="${selected.has(item.id) ? "Quitar" : "Agregar"} ${item.name}">
-              ${selected.has(item.id) ? "✓ Agregada" : "+ Agregar"}
-            </button>
+          grid.innerHTML = items
+            .map(
+              (item) => `
+        <div class="menu-card ${selected.has(item.id) ? "selected" : ""}" id="card-${item.id}">
+          ${
+            item.img
+              ? `<img class="menu-card-img" src="${item.img}" alt="${item.name}" loading="lazy">`
+              : `<div class="menu-card-img-placeholder">${item.emoji}</div>`
+          }
+          <div class="menu-card-body">
+            <span class="menu-tag ${tagClasses[item.tag]}">${item.tagLabel}</span>
+            <div class="menu-card-name">${item.name}</div>
+            <div class="menu-card-desc">${item.desc}</div>
+            <div class="menu-card-macros">
+              <div class="macro"><div class="macro-val">${item.prot}g</div><div class="macro-key">Prot.</div></div>
+              <div class="macro"><div class="macro-val">${item.carbs}g</div><div class="macro-key">Carbs</div></div>
+              <div class="macro"><div class="macro-val">${item.fibra}g</div><div class="macro-key">Fibras</div></div>
+              <div class="macro"><div class="macro-val">${item.precio}$</div><div class="macro-key">precios</div></div>
+            </div>
+            <div class="menu-card-footer">
+
+              <button class="btn-add-menu ${selected.has(item.id) ? "added" : ""}"
+                onclick="toggleItem(${item.id})"
+                aria-label="${selected.has(item.id) ? "Quitar" : "Agregar"} ${item.name}">
+                ${selected.has(item.id) ? "✓ Agregada" : "+ Agregar"}
+              </button>
+            </div>
           </div>
         </div>
-      </div>
-    `,
-          )
-          .join("");
-      }
-
-      function toggleItem(id) {
-        if (selected.has(id)) {
-          selected.delete(id);
-        } else {
-          selected.add(id);
-        }
-        renderMenu();
-        updateOrderBar();
-      }
-
-      function updateOrderBar() {
-        const bar = document.getElementById("orderBar");
-        const count = selected.size;
-        document.getElementById("orderBarCount").textContent =
-          `${count} ${count === 1 ? "vianda" : "viandas"}`;
-
-        const countEl = document.getElementById("selectedCount");
-        const countText = document.getElementById("selectedCountText");
-        if (count > 0) {
-          bar.classList.add("visible");
-          countEl.classList.add("show");
-          countText.textContent = `${count} ${count === 1 ? "vianda seleccionada" : "viandas seleccionadas"}`;
-        } else {
-          bar.classList.remove("visible");
-          countEl.classList.remove("show");
+      `,
+            )
+            .join("");
         }
 
-        const names = [...selected]
-          .map((id) => `• ${MENU_ITEMS.find((i) => i.id === id).name}`)
-          .join("\n");
-        const msg = `Hola! Quiero pedir las siguientes viandas:\n\n${names}\n\n¿Me podés dar info sobre disponibilidad y precios?`;
-        document.getElementById("orderBarWa").href =
-          `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
-      }
+        function toggleItem(id) {
+          if (selected.has(id)) {
+            selected.delete(id);
+          } else {
+            selected.add(id);
+          }
+          renderMenu();
+          updateOrderBar();
+        }
 
-      document.getElementById("menuFilters").addEventListener("click", (e) => {
-        if (!e.target.matches(".filter-btn")) return;
-        document
-          .querySelectorAll(".filter-btn")
-          .forEach((b) => b.classList.remove("active"));
-        e.target.classList.add("active");
-        activeFilter = e.target.dataset.filter;
+        function updateOrderBar() {
+          const bar = document.getElementById("orderBar");
+          const count = selected.size;
+          document.getElementById("orderBarCount").textContent =
+            `${count} ${count === 1 ? "vianda" : "viandas"}`;
+
+          const countEl = document.getElementById("selectedCount");
+          const countText = document.getElementById("selectedCountText");
+          if (count > 0) {
+            bar.classList.add("visible");
+            countEl.classList.add("show");
+            countText.textContent = `${count} ${count === 1 ? "vianda seleccionada" : "viandas seleccionadas"}`;
+          } else {
+            bar.classList.remove("visible");
+            countEl.classList.remove("show");
+          }
+
+          const names = [...selected]
+            .map((id) => `• ${MENU_ITEMS.find((i) => i.id === id).name}`)
+            .join("\n");
+          const msg = `Hola! Quiero pedir las siguientes viandas:\n\n${names}\n\n¿Me podés dar info sobre disponibilidad y precios?`;
+          document.getElementById("orderBarWa").href =
+            `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
+        }
+
+        document.getElementById("menuFilters").addEventListener("click", (e) => {
+          if (!e.target.matches(".filter-btn")) return;
+          document
+            .querySelectorAll(".filter-btn")
+            .forEach((b) => b.classList.remove("active"));
+          e.target.classList.add("active");
+          activeFilter = e.target.dataset.filter;
+          renderMenu();
+        });
+
+        document.getElementById("orderBarClear").addEventListener("click", () => {
+          selected.clear();
+          renderMenu();
+          updateOrderBar();
+        });
+
         renderMenu();
-      });
-
-      document.getElementById("orderBarClear").addEventListener("click", () => {
-        selected.clear();
-        renderMenu();
-        updateOrderBar();
-      });
-
-      renderMenu();
     </script>
   </body>
 </html>
