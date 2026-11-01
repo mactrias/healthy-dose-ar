@@ -733,6 +733,10 @@
         background: #d5f5e3;
         color: #1a7a4a;
       }
+      .tag-liviano {
+        background: #d5f5e3;
+        color: #0fa95c;
+      }
       .tag-vegetariano {
         background: #e8f5d5;
         color: #3a7a1a;
@@ -1926,6 +1930,7 @@
         <button class="filter-btn active" data-filter="all">Todos</button>
         <button class="filter-btn" data-filter="proteico">Proteico</button>
         <button class="filter-btn" data-filter="vegano">Vegano</button>
+        <button class="filter-btn" data-filter="liviano">Liviano</button>
         <button class="filter-btn" data-filter="vegetariano">
           Vegetariano
         </button>
@@ -2424,7 +2429,7 @@
       // ── MENÚ DATA ──
       // 👉 PENDIENTE: reemplazar estos platos de ejemplo por el menú real.
       //    Para agregar una vianda: copiá un objeto del array y modificalo.
-      //    Campos: id, name, desc, tag, tagLabel, kcal, prot, carbs, grasas, emoji, img (opcional: URL de imagen)
+      //    Campos: id, name, desc, tag, tagLabel, kcal, prot, carbs, fibra, emoji, img (opcional: URL de imagen)
       const MENU_ITEMS = [
         {
           id: 1,
@@ -2448,7 +2453,7 @@
           kcal: 380,
           prot: 18,
           carbs: 48,
-          grasas: 11,
+          fibra: 11,
           emoji: "🥙",
           img: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=600&q=80",
         },
@@ -2461,7 +2466,7 @@
           kcal: 460,
           prot: 40,
           carbs: 18,
-          grasas: 22,
+          fibra: 22,
           emoji: "🐟",
           img: "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=600&q=80",
         },
@@ -2474,7 +2479,7 @@
           kcal: 395,
           prot: 22,
           carbs: 55,
-          grasas: 7,
+          fibra: 7,
           emoji: "🍝",
           img: "https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=600&q=80",
         },
@@ -2487,7 +2492,7 @@
           kcal: 350,
           prot: 20,
           carbs: 30,
-          grasas: 14,
+          fibra: 14,
           emoji: "🌯",
           img: "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=600&q=80",
         },
@@ -2500,7 +2505,7 @@
           kcal: 240,
           prot: 28,
           carbs: 12,
-          grasas: 8,
+          fibra: 8,
           emoji: "🥗",
           img: "https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=600&q=80",
         },
@@ -2513,7 +2518,7 @@
           kcal: 410,
           prot: 24,
           carbs: 44,
-          grasas: 12,
+          fibra: 12,
           emoji: "🌿",
           img: null,
         },
@@ -2526,7 +2531,7 @@
           kcal: 490,
           prot: 42,
           carbs: 40,
-          grasas: 14,
+          fibra: 14,
           emoji: "🫕",
           img: null,
         },
@@ -2539,7 +2544,7 @@
           kcal: 290,
           prot: 24,
           carbs: 16,
-          grasas: 12,
+          fibra: 12,
           emoji: "🥚",
           img: null,
         },
@@ -2580,7 +2585,7 @@
           <div class="menu-card-macros">
             <div class="macro"><div class="macro-val">${item.prot}g</div><div class="macro-key">Prot.</div></div>
             <div class="macro"><div class="macro-val">${item.carbs}g</div><div class="macro-key">Carbs</div></div>
-            <div class="macro"><div class="macro-val">${item.grasas}g</div><div class="macro-key">Grasas</div></div>
+            <div class="macro"><div class="macro-val">${item.fibra}g</div><div class="macro-key">Fibras</div></div>
           </div>
           <div class="menu-card-footer">
             <div class="menu-card-kcal">🔥 ${item.kcal} kcal</div>
